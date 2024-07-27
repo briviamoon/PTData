@@ -6,6 +6,6 @@
 #include "patient.h"
 
 bool init_database();
-bool close_database()
+bool close_database();
 
 #endif

@@ -6,7 +6,7 @@
 
 typedef struct {
     char insurance[MAX_STRING_LENGTH];
-    init count;
+    int count;
 } InsuranceCount;
 
 typedef struct {
@@ -23,6 +23,11 @@ typedef struct {
     char gender[MAX_STRING_LENGTH];
     int count;
 } GenderCount;
+
+typedef struct {
+    char residence[MAX_STRING_LENGTH];
+    int count;
+} Residence;
 
 InsuranceCount* analyze_insurance(Patient** patients, int count, int* result_count);
 ConditionCount* analyze_conditions(Patient** patients, int count, int* result_count);

@@ -3,7 +3,7 @@
 
 #include "common.h"
 
-typeef struct {
+typedef struct{
     int id;
     char username[MAX_STRING_LENGTH];
     char password[MAX_STRING_LENGTH];
@@ -11,6 +11,6 @@ typeef struct {
 } User;
 
 bool authenticate(const char* username, const char* Password);
-bool create_user(const char* username, const cha* password, bo0l is_admin);
+bool create_user(const char* username, const char* password, bool is_admin);
 
 #endif

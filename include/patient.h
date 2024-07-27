@@ -8,6 +8,7 @@ typedef struct {
     char name[MAX_STRING_LENGTH];
     int age;
     char gender;
+    char residence[MAX_STRING_LENGTH];
     char insurance[MAX_STRING_LENGTH];
     char condiition[MAX_STRING_LENGTH];
     char session_date[20];

@@ -1,6 +1,6 @@
-#include "common.h"
-#include "database.h"
-#include "gui.h"
+#include "../include/common.h"
+#include "../include/database.h"
+#include "../include/gui.h"
 
 int main(int argc, char **argv) {
     if (!init_database()) {
@@ -8,12 +8,12 @@ int main(int argc, char **argv) {
         return(1);
     }
 
-    GitApplication *app;
+    GtkApplication *app;
     int status;
 
     app = gtk_application_new("com.TenderTouch.PhysioClinic", G_APPLICATION_FLAGS_NONE);
     g_signal_connect(app, "activate", G_CALLBACK(show_login_window), NULL);
-    status = g_application_run
+    status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
 
     close_database();

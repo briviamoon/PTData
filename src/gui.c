@@ -1,11 +1,11 @@
-#include "gui.h"
-#include "user.h"
-#include "patient.h"
-#include "analysis.h"
+#include "../include/gui.h"
+#include "../include/user.h"
+#include "../include/patient.h"
+#include "../include/analysis.h"
 
-static GtWidget *main_window;
-static GtWidget *username_entry;
-static GtWidget *password_entry;
+static GtkWidget *main_window;
+static GtkWidget *username_entry;
+static GtkWidget *password_entry;
 
 void show_login_window(GtkApplication* app, gpointer user_data){
 
@@ -40,7 +40,7 @@ void show_login_window(GtkApplication* app, gpointer user_data){
 
     /* Password */
     password_label = gtk_label_new("password:");
-    gtk_grid_attach(GTK_GRID(grid), parrword_laabel, 0, 2, 1, 1);
+    gtk_grid_attach(GTK_GRID(grid), password_label, 0, 2, 1, 1);
     password_entry = gtk_entry_new();
     gtk_entry_set_vsibility(GTK_ENTRY(password_entry), FALSE);
     gtk_grid_attach(GTK_GRID(grid), password_entry, 1, 2, 1, 1);
@@ -100,14 +100,83 @@ void show_main_window() {
 
     /* Analysis Entry */
     GtkWidget *data_analysis_button = gtk_button_new_with_label("Analyze Data");
-    g_signal_connect(data_analysis_butto, "clicked", G_CALLBACK(show_data_analysis), NULL);
+    g_signal_connect(data_analysis_button, "clicked", G_CALLBACK(show_data_analysis), NULL);
     gtk_grid_attach(GTK_GRID(grid), data_analysis_button, 1, 0, 1, 1);
 
-    g_signal_connect(ain_window, "destroy", G_CALLBACK(gtk_main_guit), NULL);
+    g_signal_connect(main_window, "destroy", G_CALLBACK(gtk_main_quit), NULL);
 
     gtk_widget_show_all(main_window);
 }
 
 /**
- * show_patient
+ * show_patient_entry - calls fields for patient data entry
  */
+void show_patient_entry() {
+    /* create window */
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "Enter Patient Data");
+    gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+    gtk_window_set_default_size(GTK_WINDOW(window), 300, 400);
+
+    /* grid setup */
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(window), grid);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 10);
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+
+    /* Form Fields */
+    add_form_field(grid, "Name:", 0);
+    add_form_field(grid, "Age:", 1);
+    add_form_field(grid, "Gender:", 2);
+    add_form_field(grid, "Insurance:", 3);
+    add_form_field(grid, "Condition:", 4);
+    add_form_field(grid, "Session Date:", 5);
+    add_form_field(grid, "residence:", 6);
+
+    /* submit button action */
+    GtkWidget *submit_button = gtk_button_new_with_label("Submit");
+    g_signal_connect(submit_button, "clicked", G_CALLBACK(on_patient_submit), window);
+    gtk_grid_attach(GTK_GRID(grid), submit_button, 0, 6, 2, 1);
+
+    gtk_widget_show_all(window);
+}
+
+/**
+ * on_patient_submit - manages patient data on submission.
+ *                     calls the add_patient()function if new.
+ *                     updates patient's existing data.
+ */
+void on_patient_submit(GtkWidget *widget, gpointer data) {
+    /* To do: Implement Patient dataa submission to database */
+    /* retrieve data from fields: If patient is new{
+                                        call_add_patient()
+                                    } else {
+                                        apent new patient data}*/
+    /* But these are just Ideas */
+
+    gtk_widget_destroy(GTK_WIDGET(data));
+}
+
+/**
+ * show_data_analysis - represent patient data in graphs and charts
+ */
+
+void show_data_analysis() {
+    GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
+    gtk_window_set_title(GTK_WINDOW(window), "Data Analysis");
+    gtk_container_set_border_width(GTK_CONTAINER(window), 10);
+    gtk_window_set_default_size(GTK_WINDOW(window), 600, 400);
+
+    GtkWidget *grid = gtk_grid_new();
+    gtk_container_add(GTK_CONTAINER(window), grid);
+    gtk_grid_set_row_spacing(GTK_GRID(grid), 10);
+    gtk_grid_set_column_spacing(GTK_GRID(grid), 10);
+
+    /* TODO: Implement data analysis visualization */
+    /* maybe I'll use a library like Cairo for drawing charts */
+
+    GtkWidget *label = gtk_label_new("Patient Data Analysis (To be implemented)");
+    gtk_grid_attach(GTK_GRID(grid), label, 0, 0, 1, 1);
+
+    gtk_widget_show_all(window);
+}
