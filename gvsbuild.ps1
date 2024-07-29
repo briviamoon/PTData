@@ -6,4 +6,4 @@ python -m venv .venv
 .\.venv\Scripts\activate.ps1
 pip install .
 
-gvsbuild build gtk3
+gvsbuild build gtk3 'C:\Program Files (x86)\Microsoft Visual Studio\2022\Community'
