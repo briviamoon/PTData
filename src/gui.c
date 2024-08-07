@@ -160,7 +160,6 @@ void on_patient_submit(GtkWidget *widget, gpointer data) {
 /**
  * show_data_analysis - represent patient data in graphs and charts
  */
-
 void show_data_analysis() {
     GtkWidget *window = gtk_window_new(GTK_WINDOW_TOPLEVEL);
     gtk_window_set_title(GTK_WINDOW(window), "Data Analysis");
