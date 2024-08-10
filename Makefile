@@ -11,20 +11,11 @@ ifeq ($(DETECTED_OS),Windows)
     RM := del /Q
     EXE := .exe
     GTK_PATH := C:\gtk-build\gtk\x64\release
-    CFLAGS := -I$(GTK_PATH)/include/gtk-3.0 \
-              -I$(GTK_PATH)/include/cairo \
-              -I$(GTK_PATH)/include/pango-1.0 \
-              -I$(GTK_PATH)/include/atk-1.0 \
-              -I$(GTK_PATH)/include/gdk-pixbuf-2.0 \
-              -I$(GTK_PATH)/include/glib-2.0 \
-              -I$(GTK_PATH)/lib/glib-2.0/include \
-              -I./include
-    LDFLAGS := -L$(GTK_PATH)/lib \
-               -lgtk-3 -lgdk-3 -lgdi32 -limm32 -lshell32 -lole32 \
-               -Wl,-luuid -lpangocairo-1.0 -lpangoft2-1.0 -lfreetype \
-               -lpango-1.0 -latk-1.0 -lcairo-gobject -lcairo \
-               -lgdk_pixbuf-2.0 -lgio-2.0 -lgobject-2.0 -lglib-2.0 \
-               -lintl -lsqlite3
+    MSYS2_PATH := C:\msys64\mingw64
+
+    CFLAGS := `pkg-config --cflags gtk+-3.0`
+
+    LDFLAGS := `pkg-config --libs gtk+-3.0`
 else
     CC := gcc
     RM := rm -f
@@ -35,7 +26,7 @@ endif
 
 SRC := $(wildcard src/*.c)
 OBJ := $(SRC:.c=.o)
-EXEC := physio_clinic_program$(EXE)
+EXEC := physio_Data$(EXE)
 
 .PHONY: all clean
 
