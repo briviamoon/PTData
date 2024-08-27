@@ -11,7 +11,7 @@ int main(int argc, char **argv) {
     GtkApplication *app;
     int status;
 
-    app = gtk_application_new("com.TenderTouch.PhysioClinic", G_APPLICATION_DEFAULT_FLAGS);
+    app = gtk_application_new("com.TenderTouch.PhysioClinic", G_APPLICATION_FLAGS_NONE);
     g_signal_connect(app, "activate", G_CALLBACK(show_login_window), NULL);
     status = g_application_run(G_APPLICATION(app), argc, argv);
     g_object_unref(app);
